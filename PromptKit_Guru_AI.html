@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8fafc">
+  <title>PromptKit Guru AI — Template Gemini untuk Guru</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --panel2: #f1f5f9;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --line: #e2e8f0;
+      --line-strong: #cbd5e1;
+      --a: #4f46e5;
+      --a-hover: #4338ca;
+      --b: #0284c7;
+      --c: #d97706;
+      --radius: 20px;
+      --radius-sm: 12px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+      --shadow-md: 0 4px 16px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+      --shadow-lg: 0 12px 32px -4px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse at 8% 0%, rgba(79, 70, 229, 0.08), transparent 40%),
+        radial-gradient(ellipse at 92% 14%, rgba(2, 132, 199, 0.07), transparent 36%),
+        radial-gradient(ellipse at 50% 50%, rgba(217, 119, 6, 0.03), transparent 45%);
+      color: var(--text);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: auto;
+      padding: 28px 22px 60px;
+    }
+
+    /* Topbar */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      font-size: 19px;
+      color: #0f172a;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--a), var(--b));
+      font-size: 22px;
+      color: #ffffff;
+      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.28);
+    }
+
+    .pill {
+      border: 1px solid #c7d2fe;
+      padding: 8px 14px;
+      border-radius: 999px;
+      color: var(--a);
+      font-size: 12px;
+      font-weight: 700;
+      background: #eef2ff;
+      letter-spacing: 0.5px;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #e0e7ff;
+      border-radius: 30px;
+      padding: clamp(26px, 5vw, 56px);
+      background: linear-gradient(135deg, #ffffff 0%, #f0fdfa 50%, #eff6ff 100%);
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero:after {
+      content: "✦";
+      position: absolute;
+      right: 5%;
+      top: 4%;
+      font-size: clamp(80px, 15vw, 170px);
+      color: rgba(79, 70, 229, 0.05);
+      transform: rotate(12deg);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #0369a1;
+      background: #e0f2fe;
+      border: 1px solid #bae6fd;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1.1;
+      letter-spacing: -1.6px;
+      max-width: 760px;
+      margin: 14px 0;
+      color: #0f172a;
+      font-weight: 800;
+    }
+
+    .gradient {
+      background: linear-gradient(105deg, #4338ca, #0284c7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 690px;
+      color: #475569;
+      font-size: 16px;
+      margin: 0 0 6px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    /* Buttons */
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 11px 18px;
+      font-weight: 700;
+      transition: all .2s ease;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .primary {
+      background: linear-gradient(135deg, var(--a), #3b82f6);
+      color: #ffffff;
+      box-shadow: 0 6px 18px rgba(79, 70, 229, 0.25);
+    }
+
+    .primary:hover {
+      box-shadow: 0 10px 24px rgba(79, 70, 229, 0.35);
+      filter: brightness(1.04);
+    }
+
+    .secondary {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1.5px solid var(--line-strong);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .secondary:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+    }
+
+    .teal {
+      background: linear-gradient(135deg, #0d9488, #059669);
+      color: #ffffff;
+      box-shadow: 0 6px 18px rgba(13, 148, 136, 0.25);
+    }
+
+    .teal:hover {
+      box-shadow: 0 10px 22px rgba(13, 148, 136, 0.35);
+      filter: brightness(1.04);
+    }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 20px 0 36px;
+    }
+
+    .stat {
+      padding: 18px 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--panel);
+      box-shadow: var(--shadow-sm);
+      transition: transform .2s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      color: #0f172a;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .stat span {
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* Section head */
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 15px;
+      margin: 36px 0 18px;
+    }
+
+    .section-head h2 {
+      font-size: 26px;
+      letter-spacing: -0.6px;
+      margin: 0;
+      color: #0f172a;
+      font-weight: 800;
+    }
+
+    .section-head p {
+      margin: 5px 0 0;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Builder */
+    .builder {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      min-width: 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card h3 {
+      margin: 0 0 6px;
+      font-size: 19px;
+      color: #0f172a;
+      font-weight: 800;
+    }
+
+    .sub {
+      color: var(--text-muted);
+      font-size: 13.5px;
+      margin: 0 0 20px;
+      line-height: 1.5;
+    }
+
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      background: #f8fafc;
+      border: 1.5px solid var(--line);
+      border-radius: 11px;
+      padding: 11px 13px;
+      color: var(--text);
+      outline: none;
+      transition: all .2s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      background: #ffffff;
+      border-color: var(--a);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.14);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #94a3b8;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 82px;
+    }
+
+    /* Output */
+    .output {
+      background: #f8fafc;
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      min-height: 260px;
+      white-space: pre-wrap;
+      color: #1e293b;
+      font-size: 13.5px;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
+    }
+
+    .output-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .output-top span {
+      font-size: 12px;
+      color: var(--a);
+      background: #eef2ff;
+      border: 1px solid #c7d2fe;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    /* Library & Filters */
+    .filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 16px 0 20px;
+    }
+
+    .filter {
+      border: 1px solid var(--line-strong);
+      background: #ffffff;
+      color: #475569;
+      border-radius: 999px;
+      padding: 8px 15px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: all .2s ease;
+    }
+
+    .filter:hover {
+      border-color: #94a3b8;
+      color: #0f172a;
+      background: #f8fafc;
+    }
+
+    .filter.active {
+      background: var(--a);
+      border-color: var(--a);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+    }
+
+    .searchrow {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .searchrow input {
+      max-width: 360px;
+      background: #ffffff;
+    }
+
+    /* Grid & Template Cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .template {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 18px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      min-height: 240px;
+      transition: all .25s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .template:hover {
+      transform: translateY(-4px);
+      border-color: #a5b4fc;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .template-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      gap: 8px;
+    }
+
+    .template .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: #eff6ff;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .template-badges {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+    }
+
+    .tag {
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-weight: 800;
+      width: fit-content;
+      margin-bottom: 8px;
+    }
+
+    .tag[data-cat="Administrasi"] {
+      color: #0284c7;
+      background: #e0f2fe;
+    }
+
+    .tag[data-cat="Bahan Ajar"] {
+      color: #b45309;
+      background: #fef3c7;
+    }
+
+    .tag[data-cat="Penilaian"] {
+      color: #7c3aed;
+      background: #ede9fe;
+    }
+
+    .tag[data-cat="Komunikasi"] {
+      color: #059669;
+      background: #d1fae5;
+    }
+
+    .tag:not([data-cat]) {
+      color: #0284c7;
+      background: #e0f2fe;
+    }
+
+    .file-tag {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #334155;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 3px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .template h3 {
+      font-size: 17px;
+      margin: 4px 0 8px;
+      color: #0f172a;
+      font-weight: 800;
+    }
+
+    .template p {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin: 0 0 16px;
+      flex: 1;
+      line-height: 1.55;
+    }
+
+    .template .btn {
+      width: 100%;
+      font-size: 13px;
+      padding: 10px;
+    }
+
+    /* Note */
+    .note {
+      margin-top: 28px;
+      border: 1px solid #fde68a;
+      background: #fffbeb;
+      border-radius: 18px;
+      padding: 18px 22px;
+      color: #92400e;
+      font-size: 13.5px;
+      line-height: 1.6;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .note strong {
+      color: #b45309;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 40px;
+      padding-top: 10px;
+    }
+
+    .footer-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px 28px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .footer-logo-sm {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--a), var(--b));
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .footer-author {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      color: #334155;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+
+    .footer-author .author-icon {
+      font-size: 16px;
+    }
+
+    .footer-author strong {
+      color: #1e1b4b;
+    }
+
+    .footer-subrow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--line);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer-school {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .footer-school .school-badge {
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 22px;
+      left: 50%;
+      transform: translate(-50%, 20px);
+      opacity: 0;
+      pointer-events: none;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 12px 22px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      box-shadow: var(--shadow-lg);
+      transition: .25s;
+      z-index: 10;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .empty {
+      display: none;
+      color: var(--text-muted);
+      padding: 35px;
+      text-align: center;
+      border: 2px dashed var(--line-strong);
+      border-radius: 16px;
+      background: #ffffff;
+    }
+
+    /* Responsive */
+    @media(max-width: 900px) {
+      .builder {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width: 580px) {
+      .wrap {
+        padding: 16px 14px 40px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+      }
+
+      .pill {
+        display: none;
+      }
+
+      .stats {
+        gap: 8px;
+      }
+
+      .stat {
+        padding: 14px;
+      }
+
+      .stat strong {
+        font-size: 20px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .fields {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .hero {
+        border-radius: 22px;
+      }
+
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .footer-row,
+      .footer-subrow {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">✦</div>
+        <div>PromptKit <span class="gradient">Guru AI</span></div>
+      </div>
+      <div class="pill">PERPUSTAKAAN PROMPT • GURU INDONESIA</div>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow">Mengajar lebih siap, administrasi lebih rapi</div>
+      <h1>Pemanfaatan Gemini AI dan Akun belajar.id<br><span class="gradient">untuk Administrasi dan Bahan Ajar</span>
+      </h1>
+      <p>Kumpulan template prompt siap pakai untuk membantu guru menyusun administrasi pembelajaran dan bahan ajar
+        bersama Gemini AI. Sesuaikan konteks kelas, salin prompt, lalu kembangkan hasilnya sesuai kebutuhan.</p>
+      <div class="hero-actions">
+        <button class="btn primary" onclick="document.querySelector('#builder').scrollIntoView({behavior:'smooth'})">✦
+          Buat prompt sendiri</button>
+        <button class="btn secondary"
+          onclick="document.querySelector('#library').scrollIntoView({behavior:'smooth'})">Jelajahi template ↓</button>
+      </div>
+    </section>
+
+    <div class="stats">
+      <div class="stat"><strong>12+</strong><span>Template praktis</span></div>
+      <div class="stat"><strong>2 kategori</strong><span>Administrasi & bahan ajar</span></div>
+      <div class="stat"><strong>100% fleksibel</strong><span>Bisa disesuaikan kebutuhan</span></div>
+    </div>
+
+    <section id="builder">
+      <div class="section-head">
+        <div>
+          <h2>✦ Prompt Builder</h2>
+          <p>Isi konteks singkat, lalu buat prompt yang lebih relevan untuk Gemini.</p>
+        </div>
+      </div>
+      <div class="builder">
+        <div class="card">
+          <h3>Atur kebutuhan Anda</h3>
+          <p class="sub">Semakin jelas konteksnya, semakin mudah AI memberi hasil yang sesuai.</p>
+          <div class="fields">
+            <div class="field"><label for="jenis">Jenis kebutuhan</label>
+              <select id="jenis">
+                <option>Jurnal mengajar</option>
+                <option>Daftar absensi siswa</option>
+                <option>Agenda kegiatan pembelajaran</option>
+                <option>Rekap dan analisis nilai</option>
+                <option>LKPD</option>
+                <option>Materi pembelajaran</option>
+                <option>Presentasi pembelajaran</option>
+                <option>Soal evaluasi</option>
+                <option>Rubrik penilaian</option>
+                <option>Program remedial dan pengayaan</option>
+                <option>Modul praktikum/proyek</option>
+                <option>Komunikasi untuk orang tua</option>
+                <option>Lainnya</option>
+              </select>
+            </div>
+            <div class="field"><label for="jenjang">Jenjang</label>
+              <select id="jenjang">
+                <option>SMA/SMK</option>
+                <option>SD</option>
+                <option>SMP</option>
+                <option>MA/MTs/MI</option>
+                <option>Perguruan tinggi</option>
+                <option>Lainnya</option>
+              </select>
+            </div>
+            <div class="field"><label for="kelas">Kelas / fase</label><input id="kelas"
+                placeholder="Contoh: X / Fase E"></div>
+            <div class="field"><label for="mapel">Mata pelajaran</label><input id="mapel"
+                placeholder="Contoh: Matematika"></div>
+            <div class="field full"><label for="topik">Materi / topik / tujuan</label><input id="topik"
+                placeholder="Contoh: Bilangan berpangkat dan sifat-sifatnya"></div>
+            <div class="field"><label for="waktu">Alokasi waktu</label><input id="waktu"
+                placeholder="Contoh: 2 × 45 menit"></div>
+            <div class="field"><label for="format">Format hasil</label>
+              <select id="format">
+                <option>Tabel yang rapi</option>
+                <option>Dokumen terstruktur</option>
+                <option>Langkah-langkah praktis</option>
+                <option>Format siap disalin ke Word</option>
+                <option>Slide presentasi</option>
+                <option>Campuran tabel dan uraian</option>
+              </select>
+            </div>
+            <div class="field full"><label for="konteks">Catatan / kebutuhan khusus</label><textarea id="konteks"
+                placeholder="Contoh: gunakan bahasa sederhana, pembelajaran berdiferensiasi, fasilitas terbatas, sertakan kunci jawaban..."></textarea>
+            </div>
+          </div>
+          <div class="controls"><button class="btn primary" onclick="buildPrompt()">Buat prompt ✦</button><button
+              class="btn secondary" onclick="resetForm()">Reset</button></div>
+        </div>
+        <div class="card">
+          <div class="output-top">
+            <h3>Prompt siap disalin</h3><span id="wordcount">Belum dibuat</span>
+          </div>
+          <div id="output" class="output">Prompt Anda akan muncul di sini.
+
+            Tips: pilih jenis kebutuhan, isi mata pelajaran dan topik, lalu klik “Buat prompt”. Anda masih bisa mengedit
+            prompt sebelum menyalinnya ke Gemini.</div>
+          <div class="controls"><button class="btn teal" onclick="copyOutput()">⧉ Salin prompt</button><button
+              class="btn secondary" onclick="downloadPrompt()">↓ Simpan .txt</button></div>
+          <p class="sub" style="margin:14px 0 0">Buka Gemini, tempel prompt, lalu periksa dan sesuaikan hasilnya dengan
+            kondisi sekolah serta kebijakan yang berlaku.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="library">
+      <div class="section-head">
+        <div>
+          <h2>Perpustakaan Template</h2>
+          <p>Pilih template sesuai tugas Anda, lalu edit bagian dalam tanda kurung siku.</p>
+        </div>
+        <div class="searchrow"><input id="search" type="search" placeholder="Cari template..." oninput="renderCards()"
+            aria-label="Cari template"></div>
+      </div>
+      <div class="filters">
+        <button class="filter active" data-filter="Semua" onclick="setFilter('Semua',this)">Semua</button>
+        <button class="filter" data-filter="Administrasi" onclick="setFilter('Administrasi',this)">Administrasi
+          guru</button>
+        <button class="filter" data-filter="Bahan Ajar" onclick="setFilter('Bahan Ajar',this)">Bahan ajar</button>
+        <button class="filter" data-filter="Penilaian" onclick="setFilter('Penilaian',this)">Penilaian</button>
+        <button class="filter" data-filter="Komunikasi" onclick="setFilter('Komunikasi',this)">Komunikasi</button>
+      </div>
+      <div id="grid" class="grid"></div>
+      <div id="empty" class="empty">Template tidak ditemukan. Coba kata kunci lain.</div>
+    </section>
+
+    <div class="note"><strong>Catatan penting:</strong> Gemini adalah alat bantu, bukan pengganti pertimbangan
+      profesional guru. Periksa kembali fakta, kurikulum, rumus, kunci jawaban, dan format administrasi. Untuk data
+      siswa, gunakan data seperlunya dan hindari memasukkan informasi pribadi atau sensitif yang tidak diperlukan.</div>
+
+    <footer>
+      <div class="footer-card">
+        <div class="footer-row">
+          <div class="footer-brand">
+            <div class="footer-logo-sm">✦</div>
+            <div>PromptKit <strong>Guru AI</strong></div>
+          </div>
+          <div class="footer-author">
+            <span class="author-icon">✍️</span>
+            <span>Dibuat oleh <strong>Muhamad Rendi Muhindo, S.Pd.</strong> dari <strong>SMK Negeri
+                Karangpucung</strong></span>
+          </div>
+        </div>
+        <div class="footer-subrow">
+          <div class="footer-school">
+            <span>🏫</span>
+            <span>SMK Negeri Karangpucung</span>
+            <span class="school-badge">Cilacap, Jawa Tengah</span>
+          </div>
+          <div>
+            Template kerja & asisten prompt Gemini untuk guru Indonesia • Tetap ditinjau oleh guru.
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <div id="toast" class="toast">Prompt berhasil disalin!</div>
+
+  <script>
+    const templates = [
+      {
+        title: "Jurnal Mengajar Harian",
+        cat: "Administrasi",
+        icon: "📘",
+        fileType: "📄 Google Docs / Sheets",
+        desc: "Menyusun jurnal pembelajaran harian yang rapi dan mudah direkap.",
+        type: "Jurnal mengajar",
+        prompt: `Bertindaklah sebagai asisten administrasi guru di Indonesia (Google Workspace / Akun belajar.id).
+
+INSTRUKSI PEMBUATAN FILE DI GOOGLE DRIVE:
+Buatkan langsung file dokumen atau spreadsheet (Google Docs / Google Sheets di Google Drive akun belajar.id) dengan judul file: "Jurnal_Mengajar_[MAPEL]_[KELAS]". Pastikan format tabel terstruktur, rapi, dan siap diekspor ke Google Docs/Sheets.
+
+KONTEN JURNAL MENGAJAR:
+Buat template jurnal mengajar harian untuk [SEKOLAH], mata pelajaran [MAPEL], kelas [KELAS], semester [SEMESTER], tahun ajaran [TAHUN AJARAN].
+Sediakan kolom:
+1. Hari / Tanggal
+2. Jam Pelajaran (JP) & Pertemuan ke-
+3. Kelas / Fase
+4. Tujuan Pembelajaran / Materi Pokok
+5. Ringkasan Aktivitas Pembelajaran
+6. Catatan Kehadiran & Partisipasi Siswa
+7. Refleksi Guru & Kendala
+8. Tindak Lanjut Pertemuan Berikutnya
+9. Kolom Paraf Guru / Kepala Sekolah
+
+Format dalam tabel rapi, profesional, dan siap pakai. Berikan placeholder jelas untuk bagian yang perlu diisi secara berkala.`
+      },
+      {
+        title: "Daftar Absensi Siswa",
+        cat: "Administrasi",
+        icon: "🗓️",
+        fileType: "📊 Google Sheets",
+        desc: "Membuat format absensi harian, mingguan, atau bulanan.",
+        type: "Daftar absensi siswa",
+        prompt: `Bertindaklah sebagai asisten administrasi guru di Indonesia (Google Workspace / Akun belajar.id).
+
+INSTRUKSI PEMBUATAN FILE DI GOOGLE DRIVE:
+Buatkan langsung file spreadsheet (Google Sheets di Google Drive akun belajar.id) dengan judul file: "Absensi_Siswa_[KELAS]_[MAPEL]". Sediakan tabel spreadsheet lengkap dengan rumus/formula kehadiran yang siap diekspor ke Google Sheets.
+
+KONTEN DAFTAR ABSENSI:
+Buatkan template daftar absensi siswa untuk [SEKOLAH], kelas [KELAS], [MAPEL/WALI KELAS], periode [PERIODE].
+Sediakan:
+1. Kolom Nomor, NISN/NIS, Nama Siswa (sediakan placeholder untuk [JUMLAH SISWA] siswa).
+2. Kolom Tanggal/Pertemuan dengan opsi kode: H (Hadir), S (Sakit), I (Izin), A (Alpa/Tanpa Keterangan).
+3. Kolom Rekapitulasi Otomatis dengan rumus Google Sheets:
+   - Jumlah H, S, I, A menggunakan formula =COUNTIF()
+   - Persentase Kehadiran: =COUNTIF(range,"H")/Total_Pertemuan*100%
+4. Legenda kode kehadiran dan kolom tanda tangan guru mata pelajaran / wali kelas di bagian bawah.`
+      },
+      {
+        title: "Agenda Kegiatan Pembelajaran",
+        cat: "Administrasi",
+        icon: "🧭",
+        fileType: "📄 Google Docs / Sheets",
+        desc: "Merangkum rencana dan realisasi kegiatan kelas.",
+        type: "Agenda kegiatan pembelajaran",
+        prompt: `Bertindaklah sebagai asisten administrasi guru di Indonesia (Google Workspace / Akun belajar.id).
+
+INSTRUKSI PEMBUATAN FILE DI GOOGLE DRIVE:
+Buatkan langsung file dokumen atau spreadsheet (Google Docs / Google Sheets di Google Drive akun belajar.id) dengan judul file: "Agenda_Pembelajaran_[MAPEL]_[KELAS]".
+
+KONTEN AGENDA KEGIATAN:
+Buatkan format agenda kegiatan pembelajaran untuk guru [MAPEL], kelas [KELAS], semester [SEMESTER].
+Sajikan tabel komprehensif berisi:
+- Tanggal & Alokasi Waktu
+- Topik / Materi: [TOPIK]
+- Tujuan Pembelajaran
+- Rencana Kegiatan (Pembuka, Inti, Penutup secara ringkas)
+- Media & Sumber Belajar
+- Bentuk Asesmen Pembelajaran
+- Realisasi di Kelas & Catatan Penyesuaian
+- Rencana Tindak Lanjut
+
+Pisahkan bagian rencana dan realisasi agar mudah dievaluasi secara berkala. Format rapi dan siap cetak.`
+      },
+      {
+        title: "Rekap dan Analisis Nilai",
+        cat: "Penilaian",
+        icon: "📊",
+        fileType: "📊 Google Sheets",
+        desc: "Membantu merangkum hasil asesmen dan merencanakan tindak lanjut.",
+        type: "Rekap dan analisis nilai",
+        prompt: `Bertindaklah sebagai asisten asesmen dan analisis nilai guru (Google Workspace / Akun belajar.id).
+
+INSTRUKSI PEMBUATAN FILE DI GOOGLE DRIVE:
+Buatkan langsung file spreadsheet (Google Sheets di Google Drive akun belajar.id) dengan judul file: "Rekap_Nilai_[MAPEL]_[KELAS]_[TOPIK]". Pastikan format tabel memiliki formula Google Sheets siap pakai yang dapat langsung diekspor ke Sheets.
+
+KONTEN REKAP & ANALISIS NILAI:
+Buatkan format rekap dan analisis hasil asesmen untuk [MAPEL], kelas [KELAS], topik [TOPIK].
+Sediakan:
+1. Tabel Rekap Nilai Siswa:
+   - Kolom: Nomor, NIS/NISN, Nama Siswa, Skor tiap indikator/soal, Nilai Akhir (Skala 0-100).
+   - Kolom Status Ketercapaian: Tuntas / Belum Tuntas menggunakan rumus =IF(Nilai>=KKTP, "Tuntas", "Belum Tuntas").
+2. Baris Statistik Kelas Otomatis:
+   - Nilai Rata-rata Kelas (=AVERAGE)
+   - Nilai Tertinggi (=MAX) dan Nilai Terendah (=MIN)
+   - Persentase Ketuntasan Klasikal
+3. Tabel Analisis Butir / Indikator: mengidentifikasi indikator mana yang paling banyak belum dikuasai siswa serta rekomendasi tindak lanjutnya.`
+      },
+      {
+        title: "Catatan Refleksi Guru",
+        cat: "Administrasi",
+        icon: "💡",
+        fileType: "📄 Google Docs",
+        desc: "Membuat refleksi setelah pembelajaran untuk perbaikan berikutnya.",
+        type: "Lainnya",
+        prompt: `Bertindaklah sebagai mitra refleksi pedagogik guru (Google Workspace / Akun belajar.id).
+
+INSTRUKSI PEMBUATAN FILE DI GOOGLE DRIVE:
+Buatkan langsung file dokumen (Google Docs di Google Drive akun belajar.id) dengan judul file: "Refleksi_Guru_[MAPEL]_[KELAS]". Format terstruktur dengan penataan dokumen resmi yang siap diekspor ke Google Docs.
+
+KONTEN REFLEKSI GURU:
+Bantu saya menyusun format instrumen refleksi guru setelah pembelajaran [MAPEL] kelas [KELAS] pada topik [TOPIK].
+Struktur dokumen meliputi:
+1. Identitas Pembelajaran (Tanggal, Topik, Kelas, Alokasi Waktu).
+2. Ketercapaian Tujuan Pembelajaran & Bukti Belajar yang Teramati.
+3. Bagian Pembelajaran yang Berjalan Sangat Baik (Apresiasi Praktik Baik).
+4. Kendala & Tantangan yang Dihadapi Guru Maupun Siswa.
+5. Kebutuhan Siswa Berdiferensiasi yang Belum Terakomodasi.
+6. Evaluasi Efektivitas Media, Sumber Belajar, dan Metode Pengajaran.
+7. Rencana Aksi Perbaikan Nyata untuk Pertemuan Selanjutnya.`
+      },
+      {
+        title: "Surat / Pengumuman Sekolah",
+        cat: "Komunikasi",
+        icon: "✉️",
+        fileType: "📄 Google Docs",
+        desc: "Menyusun pengumuman yang jelas, sopan, dan siap diedit.",
+        type: "Lainnya",
+        prompt: `Bertindaklah sebagai asisten administrasi dan komunikasi sekolah (Google Workspace / Akun belajar.id).
+
+INSTRUKSI PEMBUATAN FILE DI GOOGLE DRIVE:
+Buatkan langsung file dokumen resmi (Google Docs di Google Drive akun belajar.id) dengan judul file: "Surat_[JENIS_SURAT]_[KEPERLUAN]". Dokumen harus siap dicetak atau diekspor ke Google Docs.
+
+KONTEN SURAT / PENGUMUMAN:
+Drafkan surat/pengumuman resmi mengenai [KEPERLUAN] yang ditujukan kepada [SASARAN/PENERIMA].
+Format mencakup:
+1. Kop Surat Resmi Sekolah (placeholder nama sekolah, alamat, kontak).
+2. Nomor Surat, Lampiran, dan Perihal Surat.
+3. Salam Pembuka yang Santun dan Profesional.
+4. Paragraf Pembuka & Penyampaian Maksud Surat.
+5. Rincian Kegiatan/Informasi (Hari, Tanggal, Waktu, Tempat, Agenda).
+6. Hal-hal yang Perlu Disiapkan/Dilakukan oleh Penerima.
+7. Narahubung / Kontak Informasi.
+8. Paragraf Penutup, Tempat/Tanggal Pembuatan Surat, serta Kolom Tanda Tangan & Cap Sekolah.`
+      },
+      {
+        title: "LKPD Siap Digunakan",
+        cat: "Bahan Ajar",
+        icon: "📝",
+        fileType: "📄 Google Docs",
+        desc: "Menyusun lembar kerja dengan aktivitas, petunjuk, dan refleksi.",
+        type: "LKPD",
+        prompt: `Bertindaklah sebagai perancang Lembar Kerja Peserta Didik (LKPD) profesional (Google Workspace / Akun belajar.id).
+
+INSTRUKSI PEMBUATAN FILE DI GOOGLE DRIVE:
+Buatkan langsung file dokumen LKPD (Google Docs di Google Drive akun belajar.id) dengan judul file: "LKPD_[MAPEL]_[KELAS]_[TOPIK]". Pastikan tata letak rapi, visual menarik, dan siap dicetak atau dibagikan ke Google Classroom.
+
+KONTEN LKPD:
+Rancang LKPD untuk [MAPEL], [JENJANG/KELAS], topik [TOPIK], alokasi waktu [WAKTU], dengan tujuan pembelajaran [TUJUAN].
+Struktur LKPD:
+1. Header Identitas: Nama Kelompok/Siswa, Kelas, Tanggal, Mata Pelajaran, dan Tujuan Pembelajaran.
+2. Petunjuk Pengerjaan & Apersepsi Singkat yang Memantik Rasa Ingin Tahu.
+3. Alat & Bahan yang Dibutuhkan (disesuaikan dengan kondisi [KONDISI FASILITAS]).
+4. Aktivitas Belajar Bertahap: stimulus berbasis masalah nyata/kontekstual.
+5. Lembar Pengamatan & Kolom/Tabel Pengisian Data yang Proporsional.
+6. Pertanyaan Pemantik Diskusi & Analisis Berpikir Kritis (HOTS).
+7. Ruang Penarikan Kesimpulan Bersama Siswa.
+8. Refleksi Belajar Singkat & Rubrik Penilaian Singkat Guru.`
+      },
+      {
+        title: "Materi Pembelajaran",
+        cat: "Bahan Ajar",
+        icon: "📚",
+        fileType: "📄 Google Docs",
+        desc: "Mengembangkan materi yang terstruktur dari konsep dasar sampai contoh.",
+        type: "Materi pembelajaran",
+        prompt: `Bertindaklah sebagai ahli kurikulum dan penyusun bahan ajar (Google Workspace / Akun belajar.id).
+
+INSTRUKSI PEMBUATAN FILE DI GOOGLE DRIVE:
+Buatkan langsung file modul materi ajar (Google Docs di Google Drive akun belajar.id) dengan judul file: "Bahan_Ajar_[MAPEL]_[KELAS]_[TOPIK]". Susun dokumen dengan gaya visual modul ajar modern yang siap diekspor ke Google Docs.
+
+KONTEN MATERI PEMBELAJARAN:
+Buat bahan bacaan/materi ajar untuk [MAPEL], [JENJANG/KELAS], topik [TOPIK], dengan tujuan [TUJUAN PEMBELAJARAN].
+Sistematika materi:
+1. Judul Modul & Pengantar Menarik: Mengapa materi ini penting dalam kehidupan nyata?
+2. Peta Konsep & Prasyarat Materi.
+3. Uraian Materi Inti: dibagi ke dalam subbab terstruktur, bahasa komunikatif dan mudah dipahami siswa.
+4. Glosarium / Istilah Kunci.
+5. Contoh Kasus Nyata & Pembahasan Langkah demi Langkah (Step-by-step).
+6. Miskonsepsi Umum pada topik ini dan cara pemahaman yang benar.
+7. Rangkuman Intisari Materi.
+8. 3-5 Soal Uji Pemahaman Mandiri (dari tingkat pemahaman hingga penalaran).`
+      },
+      {
+        title: "Slide Presentasi Pembelajaran",
+        cat: "Bahan Ajar",
+        icon: "🖥️",
+        fileType: "🖥️ Google Slides",
+        desc: "Membuat alur slide yang ringkas dan menarik untuk pembelajaran.",
+        type: "Presentasi pembelajaran",
+        prompt: `Bertindaklah sebagai desainer instruksional dan media presentasi pembelajaran (Google Workspace / Akun belajar.id).
+
+INSTRUKSI PEMBUATAN FILE DI GOOGLE DRIVE:
+Buatkan langsung file presentasi (Google Slides di Google Drive akun belajar.id) dengan judul file: "Presentasi_[MAPEL]_[TOPIK]". Susun struktur slide yang siap dibuatkan atau diimpor langsung ke Google Slides.
+
+KONTEN PRESENTASI:
+Rancang alur [JUMLAH SLIDE] slide presentasi pembelajaran tentang [TOPIK] untuk [MAPEL], kelas [KELAS], alokasi waktu [WAKTU].
+Untuk setiap slide, sertakan rincian lengkap:
+- Nomor Slide & Judul Slide yang Menarik
+- Konten Utama: 3-4 butir poin teks ringkas (bukan paragraf padat)
+- Panduan Visual: Rekomendasi gambar, ikon, bagan, diagram, atau palet warna kontras tinggi
+- Catatan Pembicara Guru (Speaker Notes): Narasi penjelasan lisan yang dapat dibaca guru saat mengajar
+- Aktivitas Siswa / Pertanyaan Interaktif: Pertanyaan pemantik atau kuis cepat di layar
+
+Alur mencakup: Slide Judul & Apersepsi, Tujuan Pembelajaran, Eksplorasi Konsep Bertahap, Studi Kasus/Contoh Nyata, Kuis Interaktif, dan Rangkuman Penutup.`
+      },
+      {
+        title: "Soal Evaluasi dan Kunci",
+        cat: "Penilaian",
+        icon: "🎯",
+        fileType: "📄 Google Docs / Forms",
+        desc: "Menghasilkan soal beragam tingkat kesulitan beserta pembahasan.",
+        type: "Soal evaluasi",
+        prompt: `Bertindaklah sebagai ahli evaluasi dan penyusunan instrumen tes pembelajaran (Google Workspace / Akun belajar.id).
+
+INSTRUKSI PEMBUATAN FILE DI GOOGLE DRIVE:
+Buatkan langsung file dokumen bank soal (Google Docs) dan format kuis (Google Forms di akun belajar.id) dengan judul file: "Evaluasi_[MAPEL]_[KELAS]_[TOPIK]". Pastikan bagian naskah soal siswa terpisah dari kunci jawaban agar siap dicetak atau dibagikan.
+
+KONTEN EVALUASI & KUNCI:
+Buat paket evaluasi untuk [MAPEL], kelas [KELAS], topik [TOPIK], sesuai tujuan [TUJUAN].
+Jumlah soal: [JUMLAH] soal dengan komposisi [BENTUK SOAL: pilihan ganda/isian/uraian].
+Dokumen terdiri atas:
+1. Kisi-kisi Singkat: Capaian pembelajaran, indikator soal, level kognitif (C1-C5), bentuk soal, dan nomor soal.
+2. Lembar Naskah Soal Siswa: Petunjuk umum pengerjaan dan daftar soal bernomor dengan stimulus berbasis konteks nyata/literasi/numerasi. Pilihan ganda harus memiliki opsi A-D/E yang logis.
+3. Kunci Jawaban Lengkap & Pembahasan Analitis untuk tiap nomor soal.
+4. Pedoman Rubrik Penskoran: Kriteria penilaian dan bobot nilai per butir soal uraian/esai.`
+      },
+      {
+        title: "Rubrik Penilaian",
+        cat: "Penilaian",
+        icon: "🧩",
+        fileType: "📄 Google Docs / Sheets",
+        desc: "Membuat kriteria dan deskriptor yang transparan untuk tugas/proyek.",
+        type: "Rubrik penilaian",
+        prompt: `Bertindaklah sebagai spesialis asesmen autentik pembelajaran (Google Workspace / Akun belajar.id).
+
+INSTRUKSI PEMBUATAN FILE DI GOOGLE DRIVE:
+Buatkan langsung file dokumen atau spreadsheet (Google Docs / Google Sheets di Google Drive akun belajar.id) dengan judul file: "Rubrik_Penilaian_[MAPEL]_[TOPIK]". Format harus siap digunakan untuk penilaian langsung atau diekspor ke Google Docs/Sheets.
+
+KONTEN RUBRIK PENILAIAN:
+Buatkan rubrik penilaian komprehensif untuk [TUGAS/PROYEK/PRESENTASI/PRAKTIK] pada mata pelajaran [MAPEL], kelas [KELAS], topik [TOPIK], yang selaras dengan tujuan [TUJUAN].
+Sajikan dalam tabel matriks penilaian:
+1. Kriteria / Aspek yang Dinilai (misal: penguasaan konsep, kreativitas, kejelasan penyampaian, kerja sama).
+2. Bobot Persentase tiap kriteria (total akumulasi 100%).
+3. Deskriptor Kinerja 4 Tingkat Capaian yang konkret dan terukur:
+   - Skor 4: Sangat Baik / Mahir (deskripsi capaian melampaui standar)
+   - Skor 3: Baik / Cakap (deskripsi capaian sesuai standar)
+   - Skor 2: Cukup / Berkembang (deskripsi capaian sebagian terpenuhi)
+   - Skor 1: Perlu Bimbingan / Awal (deskripsi capaian belum terpenuhi)
+4. Rumus Konversi Nilai Akhir & Lembar Catatan Umpan Balik Kualitatif (Feedback) Guru.`
+      },
+      {
+        title: "Remedial dan Pengayaan",
+        cat: "Bahan Ajar",
+        icon: "🌱",
+        fileType: "📄 Google Docs",
+        desc: "Menyusun kegiatan tindak lanjut sesuai kebutuhan belajar siswa.",
+        type: "Program remedial dan pengayaan",
+        prompt: `Bertindaklah sebagai perancang program diferensiasi dan intervensi pembelajaran (Google Workspace / Akun belajar.id).
+
+INSTRUKSI PEMBUATAN FILE DI GOOGLE DRIVE:
+Buatkan langsung file dokumen program tindak lanjut (Google Docs di Google Drive akun belajar.id) dengan judul file: "Program_Remedial_Pengayaan_[MAPEL]_[KELAS]".
+
+KONTEN REMEDIAL & PENGAYAAN:
+Rancang program kegiatan tindak lanjut pembelajaran untuk [MAPEL], kelas [KELAS], topik [TOPIK], berdasarkan tujuan [TUJUAN].
+Dokumen dibagi menjadi dua bagian terpisah:
+1. Program Pembelajaran Remedial (untuk siswa yang belum mencapai KKTP):
+   - Diagnosis kesulitan belajar umum pada topik ini.
+   - Penjelasan materi dengan metode/analogi baru yang lebih sederhana.
+   - Lembar aktivitas latihan terbimbing (Scaffolding).
+   - Instrumen asesmen ulang/retes remedial yang setara.
+2. Program Pembelajaran Pengayaan (untuk siswa yang telah mencapai KKTP):
+   - Aktivitas eksplorasi tingkat lanjut / studi kasus pemecahan masalah kontekstual.
+   - Mini proyek aplikasi atau tantangan kreatif.
+3. Format Tabel Monitoring & Rekapitulasi Hasil Tindak Lanjut Guru.`
+      },
+      {
+        title: "Modul Praktikum / Proyek",
+        cat: "Bahan Ajar",
+        icon: "🔬",
+        fileType: "📄 Google Docs",
+        desc: "Memandu aktivitas praktik atau proyek dengan langkah dan keselamatan.",
+        type: "Modul praktikum/proyek",
+        prompt: `Bertindaklah sebagai penyusun panduan praktikum laboratorium dan modul proyek kejuruan/sekolah (Google Workspace / Akun belajar.id).
+
+INSTRUKSI PEMBUATAN FILE DI GOOGLE DRIVE:
+Buatkan langsung file dokumen panduan praktikum/proyek (Google Docs di Google Drive akun belajar.id) dengan judul file: "Modul_Praktikum_[MAPEL]_[TOPIK]". Pastikan tata letak rapi, diagram alur jelas, dan siap dicetak sebagai buku saku/panduan siswa.
+
+KONTEN PANDUAN PRAKTIKUM / PROYEK:
+Rancang modul panduan praktikum/proyek untuk [MAPEL], kelas [KELAS], topik [TOPIK], dengan durasi [WAKTU].
+Sistematika modul:
+1. Judul Praktikum/Proyek & Capaian Pembelajaran.
+2. Pertanyaan Pemantik / Rumusan Masalah.
+3. Teori Dasar & Konsep Singkat yang Relevan.
+4. Daftar Alat dan Bahan (dapat diperoleh dengan mudah atau sesuai fasilitas [FASILITAS]).
+5. Prosedur Keselamatan Kerja (K3) & Peringatan Keamanan Penting.
+6. Langkah Kerja Percobaan/Proyek Langkah demi Langkah (disertai instruksi pembagian peran tim).
+7. Tabel Lembar Pengamatan & Pencatatan Data Eksperimen.
+8. Pertanyaan Analisis Data & Penarikan Kesimpulan.
+9. Rubrik Asesmen Praktikum / Penilaian Kinerja Siswa.`
+      },
+      {
+        title: "Pesan untuk Orang Tua/Wali",
+        cat: "Komunikasi",
+        icon: "🤝",
+        fileType: "✉️ Google Docs / Teks",
+        desc: "Menyampaikan informasi perkembangan atau kegiatan secara empatik.",
+        type: "Lainnya",
+        prompt: `Bertindaklah sebagai guru yang komunikatif, empatik, dan profesional (Google Workspace / Akun belajar.id).
+
+INSTRUKSI PEMBUATAN FILE DI GOOGLE DRIVE:
+Buatkan draf dokumen komunikasi resmi (Google Docs) sekaligus versi teks pesan singkat (siap kirim via WhatsApp) dengan judul file/subjek: "Komunikasi_Ortu_[KELAS]_[KEPERLUAN]".
+
+KONTEN PESAN KOMUNIKASI:
+Susun draf pesan kepada orang tua/wali siswa mengenai [KEPERLUAN].
+Konteks: Kelas [KELAS], mata pelajaran [MAPEL], informasi utama [DETAIL], tindakan yang diharapkan [TINDAKAN], batas waktu [TANGGAL JIKA ADA].
+Sediakan dua format:
+1. Format Surat Resmi (Google Docs): format kop, perihal, salam hormat, rincian keperluan, penutup resmi, dan tanda tangan guru/wali kelas.
+2. Format Pesan Singkat (WhatsApp/Email): bahasa santun, ramah, to-the-point, menggunakan penekanan poin/emotikon yang sopan, serta mencantumkan narahubung yang jelas.
+Pastikan etika privasi siswa dijaga penuh tanpa menyebutkan data sensitif siswa lain.`
+      }
+    ];
+
+    let currentFilter = "Semua";
+    function setFilter(f, el) { currentFilter = f; document.querySelectorAll('.filter').forEach(x => x.classList.remove('active')); el.classList.add('active'); renderCards() }
+    function renderCards() {
+      const q = document.getElementById('search').value.toLowerCase().trim();
+      const items = templates.filter(t => (currentFilter === "Semua" || t.cat === currentFilter) && (t.title + " " + t.desc + " " + t.cat + " " + (t.fileType || "")).toLowerCase().includes(q));
+      const grid = document.getElementById('grid');
+      grid.innerHTML = items.map(t => `<article class="template"><div class="template-head"><div class="icon">${t.icon}</div><div class="template-badges"><span class="tag" data-cat="${t.cat}">${t.cat}</span><span class="file-tag">${t.fileType}</span></div></div><h3>${t.title}</h3><p>${t.desc}</p><button class="btn secondary" onclick="useTemplate('${escapeAttr(t.title)}')">Gunakan template ↗</button></article>`).join('');
+      document.getElementById('empty').style.display = items.length ? 'none' : 'block';
+    }
+    function escapeAttr(s) { return s.replace(/\\/g, '\\\\').replace(/'/g, "\\'") }
+    function useTemplate(title) {
+      const t = templates.find(x => x.title === title); if (!t) return;
+      document.getElementById('jenis').value = t.type;
+      document.getElementById('output').textContent = t.prompt;
+      document.getElementById('wordcount').textContent = t.prompt.trim().split(/\s+/).length + ' kata • template';
+      document.getElementById('builder').scrollIntoView({ behavior: 'smooth' });
+    }
+    function buildPrompt() {
+      const get = id => document.getElementById(id).value.trim();
+      const jenis = get('jenis'), jenjang = get('jenjang'), kelas = get('kelas') || '[ISI KELAS/FASE]', mapel = get('mapel') || '[ISI MATA PELAJARAN]', topik = get('topik') || '[ISI TOPIK/TUJUAN]', waktu = get('waktu') || '[ISI ALOKASI WAKTU]', format = get('format'), konteks = get('konteks') || 'Tidak ada catatan tambahan.';
+
+      const safeMapel = (mapel.replace(/[^a-zA-Z0-9]/g, '_').replace(/_+/g, '_') || 'MAPEL').replace(/^_|_$/g, '');
+      const safeKelas = (kelas.replace(/[^a-zA-Z0-9]/g, '_').replace(/_+/g, '_') || 'KELAS').replace(/^_|_$/g, '');
+      const safeTopik = (topik.replace(/[^a-zA-Z0-9]/g, '_').replace(/_+/g, '_').substring(0, 25) || 'TOPIK').replace(/^_|_$/g, '');
+
+      const fileSpecMap = {
+        'Jurnal mengajar': { type: 'Google Docs atau Google Sheets', name: `Jurnal_Mengajar_${safeMapel}_${safeKelas}` },
+        'Daftar absensi siswa': { type: 'Google Sheets (Spreadsheet dengan Rumus Kehadiran)', name: `Absensi_Siswa_${safeKelas}_${safeMapel}` },
+        'Agenda kegiatan pembelajaran': { type: 'Google Docs atau Google Sheets', name: `Agenda_Pembelajaran_${safeMapel}_${safeKelas}` },
+        'Rekap dan analisis nilai': { type: 'Google Sheets (Spreadsheet dengan Formula Otomatis)', name: `Rekap_Nilai_${safeMapel}_${safeKelas}` },
+        'LKPD': { type: 'Google Docs (Dokumen LKPD Siap Cetak/Classroom)', name: `LKPD_${safeMapel}_${safeKelas}_${safeTopik}` },
+        'Materi pembelajaran': { type: 'Google Docs (Modul Bahan Ajar)', name: `Bahan_Ajar_${safeMapel}_${safeKelas}_${safeTopik}` },
+        'Presentasi pembelajaran': { type: 'Google Slides (Alur Slide Presentasi)', name: `Presentasi_${safeMapel}_${safeTopik}` },
+        'Soal evaluasi': { type: 'Google Docs (Bank Soal) / Google Forms (Kuis)', name: `Evaluasi_${safeMapel}_${safeKelas}_${safeTopik}` },
+        'Rubrik penilaian': { type: 'Google Docs atau Google Sheets (Matriks Rubrik)', name: `Rubrik_Penilaian_${safeMapel}_${safeTopik}` },
+        'Program remedial dan pengayaan': { type: 'Google Docs (Program Diferensiasi)', name: `Remedial_Pengayaan_${safeMapel}_${safeKelas}` },
+        'Modul praktikum/proyek': { type: 'Google Docs (Panduan Praktikum/Proyek)', name: `Modul_Praktikum_${safeMapel}_${safeTopik}` },
+        'Komunikasi untuk orang tua': { type: 'Google Docs / Draf Pesan Komunikasi', name: `Komunikasi_Ortu_${safeKelas}` },
+        'Lainnya': { type: 'Google Docs atau Google Sheets', name: `Dokumen_Guru_${safeMapel}` }
+      };
+
+      const fileSpec = fileSpecMap[jenis] || { type: 'Google Docs / Sheets', name: `Dokumen_${safeMapel}` };
+
+      let detail = {
+        'Jurnal mengajar': 'Buat format jurnal mengajar harian yang mencakup kolom tanggal, jam, tujuan/materi, aktivitas pembelajaran, kehadiran, refleksi guru, dan tindak lanjut. Sediakan placeholder untuk data yang belum ada.',
+        'Daftar absensi siswa': 'Buat tabel spreadsheet absensi dengan nomor, nama siswa, tanggal/pertemuan, kode kehadiran (H, S, I, A), dan formula penghitungan persentase kehadiran otomatis. Jangan mengarang nama siswa; gunakan placeholder.',
+        'Agenda kegiatan pembelajaran': 'Buat format agenda komprehensif berisi tanggal, tujuan pembelajaran, kegiatan pembuka-inti-penutup, media/sumber, bentuk asesmen, realisasi di kelas, dan tindak lanjut.',
+        'Rekap dan analisis nilai': 'Buat tabel rekap nilai siswa dan analisis ketuntasan dengan formula otomatis (rata-rata, nilai tertinggi/terendah, persentase ketercapaian), serta catatan perbaikan indikator.',
+        'LKPD': 'Buat LKPD terstruktur lengkap dengan identitas, tujuan, petunjuk pengerjaan, stimulus konteks nyata, langkah aktivitas bertahap, ruang pengamatan/jawaban siswa, refleksi, dan rubrik penilaian ringkas.',
+        'Materi pembelajaran': 'Susun modul ajar lengkap dari judul pengantar kontekstual, konsep inti, glosarium, contoh penerapan nyata bertahap, miskonsepsi umum, rangkuman, dan soal cek pemahaman.',
+        'Presentasi pembelajaran': 'Rancang slide dengan nomor, judul, poin-poin ringkas bermakna, saran visual/ikon, catatan narasi guru (speaker notes), dan pertanyaan interaktif untuk siswa.',
+        'Soal evaluasi': 'Buat paket bank soal selaras tujuan pembelajaran, variasikan tingkat kesulitan (C1-C5), kisi-kisi ringkas, petunjuk pengerjaan, kunci jawaban, dan pedoman penskoran uraian.',
+        'Rubrik penilaian': 'Buat matriks rubrik dengan kriteria terukur, bobot persentase, 4 tingkat capaian (Sangat Baik, Baik, Cukup, Perlu Bimbingan), deskriptor operasional, dan formula nilai akhir.',
+        'Program remedial dan pengayaan': 'Susun modul tindak lanjut terpisah: remedial (diagnosis kendala, materi alternatif, latihan terbimbing, asesmen ulang) dan pengayaan (pemecahan masalah kontekstual/mini proyek).',
+        'Modul praktikum/proyek': 'Buat panduan modul praktikum/proyek yang memuat tujuan, dasar teori, alat-bahan aman, prosedur K3, langkah kerja bertahap, tabel pengamatan data, dan rubrik asesmen.',
+        'Lainnya': 'Buat draf dokumen kerja yang terstruktur, rapi, sesuai konteks pembelajaran, dan siap digunakan.'
+      }[jenis] || 'Buat hasil yang sesuai kebutuhan guru.';
+
+      const prompt = `Bertindaklah sebagai asisten profesional guru di Indonesia yang terintegrasi dengan Google Workspace (Akun belajar.id). Bantu saya menyusun ${jenis.toLowerCase()} untuk konteks berikut:
+- Jenjang: ${jenjang}
+- Kelas/fase: ${kelas}
+- Mata pelajaran: ${mapel}
+- Materi/topik/tujuan: ${topik}
+- Alokasi waktu/periode: ${waktu}
+
+INSTRUKSI PEMBUATAN FILE DI GOOGLE DRIVE (AKUN BELAJAR.ID):
+1. Buatkan langsung file ${fileSpec.type} di Google Drive saya dengan nama file: "${fileSpec.name}".
+2. Sediakan opsi/tombol ekspor ("Export to Docs" / "Export to Sheets" / ekspor Google Workspace) agar file ini dapat langsung dibuka, diedit, dan dibagikan melalui Google Drive atau Google Classroom.
+3. Susun tata letak dokumen atau spreadsheet secara rapi, berstandar format administrasi sekolah, dan siap dicetak/dipakai.
+
+TUGAS & KONTEN:
+${detail}
+
+KETENTUAN HASIL:
+- Format yang diinginkan: ${format}.
+- Gunakan bahasa Indonesia yang jelas, profesional, praktis, dan sesuai usia siswa.
+- Susun hasil dengan judul dan bagian yang logis; bila cocok gunakan tabel yang mudah disalin ke Word atau spreadsheet.
+- Jangan mengarang data, kebijakan sekolah, atau rujukan kurikulum. Gunakan placeholder untuk informasi yang belum tersedia dan jelaskan asumsi secara terbuka.
+- Periksa akurasi isi, konsistensi, keterbacaan, dan keselarasan dengan tujuan pembelajaran.
+- Jangan membuat RPM.
+
+KONTEKS TAMBAHAN:
+${konteks}
+
+Sebelum menyelesaikan, periksa apakah ada informasi penting yang belum tersedia. Jika kekurangannya menghambat akurasi, tanyakan terlebih dahulu; jika tidak, lanjutkan dengan asumsi yang dinyatakan secara jelas.`;
+
+      document.getElementById('output').textContent = prompt;
+      document.getElementById('wordcount').textContent = prompt.trim().split(/\s+/).length + ' kata';
+    }
+    function resetForm() { ['kelas', 'mapel', 'topik', 'waktu', 'konteks'].forEach(id => document.getElementById(id).value = ''); document.getElementById('jenis').selectedIndex = 0; document.getElementById('jenjang').selectedIndex = 0; document.getElementById('format').selectedIndex = 0; document.getElementById('output').textContent = 'Prompt Anda akan muncul di sini.\n\nPilih kebutuhan, isi konteks, lalu klik “Buat prompt”.'; document.getElementById('wordcount').textContent = 'Belum dibuat' }
+    async function copyOutput() {
+      const text = document.getElementById('output').textContent;
+      try { await navigator.clipboard.writeText(text); showToast('Prompt berhasil disalin!') }
+      catch (e) { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); showToast('Prompt berhasil disalin!') }
+    }
+    function downloadPrompt() {
+      const text = document.getElementById('output').textContent;
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'prompt-guru-gemini.txt'; a.click(); URL.revokeObjectURL(url); showToast('File prompt diunduh');
+    }
+    function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2200) }
+    renderCards();
+  </script>
+</body>
+
+</html>
