@@ -62,32 +62,58 @@
             font-weight: bold;
         }
 
-        /* Navigation Pills Bar */
+        /* Navigation Pills Bar (Desktop Minimalis & Modern) */
         .nav-bar {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-            padding: 15px 20px;
-            background: #F8F3E6;
-            border-bottom: 2px solid #E0D8C3;
+            flex-wrap: nowrap; /* Mencegah tombol turun ke baris baru */
+            overflow-x: auto;  /* Mengaktifkan scroll horizontal */
+            justify-content: flex-start; /* Susun dari kiri agar scroll mulus */
+            gap: 10px;
+            padding: 12px 20px; /* Padding diperkecil agar ramping */
+            
+            /* Efek Modern Glassmorphism (Tembus Pandang Blur) */
+            background: rgba(248, 243, 230, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(224, 216, 195, 0.8);
+            
             position: sticky;
             top: 0;
             z-index: 100;
+            
+            /* Agar scroll halus dan scrollbar rapi */
+            scroll-behavior: smooth;
+            scrollbar-width: thin; /* Untuk Firefox */
+            scrollbar-color: #D4A017 transparent;
+        }
+
+        /* Modifikasi Scrollbar Webkit (Chrome, Edge, Safari) agar sangat minimalis */
+        .nav-bar::-webkit-scrollbar {
+            height: 4px; /* Ukuran sangat tipis */
+        }
+        .nav-bar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .nav-bar::-webkit-scrollbar-thumb {
+            background: #D4A017;
+            border-radius: 10px;
         }
 
         .nav-btn {
             background: #FFFFFF;
             color: var(--pramuka-brown);
             text-decoration: none;
-            padding: 8px 18px;
+            padding: 7px 16px; /* Diperkecil agar lebih elegan */
             border-radius: 20px;
-            font-weight: 700;
-            font-size: 14px;
-            border: 1.5px solid var(--border-color);
+            font-weight: 600; /* Dibuat tidak terlalu tebal (bold) */
+            font-size: 13.5px;
+            border: 1px solid var(--border-color);
             transition: all 0.2s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.04);
-            white-space: normal;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            
+            /* PENTING: Mencegah tombol gepeng dan teks turun baris */
+            flex-shrink: 0;
+            white-space: nowrap; 
             text-align: center;
         }
 
