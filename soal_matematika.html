@@ -2202,14 +2202,13 @@
     let sentToGoogle = false;
     if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.startsWith('http')) {
       try {
-        // Gunakan URLSearchParams + no-cors agar kompatibel dengan Google Apps Script
-        // (mode: 'no-cors' dengan Content-Type: application/json akan diblokir browser)
-        const formData = new URLSearchParams();
-        formData.append('payload', JSON.stringify(payload));
+        // Kirim sebagai text/plain — ini "simple request" yang tidak membutuhkan preflight CORS
+        // Google Apps Script membaca isi body melalui e.postData.contents
         await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
-          body: formData
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify(payload)
         });
         sentToGoogle = true;
       } catch (err) {
