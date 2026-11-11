@@ -1895,7 +1895,8 @@
   // KONFIGURASI GOOGLE APPS SCRIPT WEB APP
   // ==========================================
   // Anda bisa mengganti URL default ini atau mengaturnya lewat tombol ⚙️ di menu atas
-  let GOOGLE_SCRIPT_URL = localStorage.getItem('tpm4_sheet_url') || "";
+  // URL Google Apps Script sudah diset secara default
+  let GOOGLE_SCRIPT_URL = localStorage.getItem('tpm4_sheet_url') || "https://script.google.com/macros/s/AKfycbz1eo10xyLbVW_ovqctGIL_imnnXzOii1yzlLltqhKUI4KEMorJQOoad4PH-DOXrdrfCg/exec";
 
   // Kunci Jawaban Lengkap (Soal 1 s.d. 30) untuk Penilaian Otomatis
   const ANSWER_KEY = {
@@ -2201,13 +2202,14 @@
     let sentToGoogle = false;
     if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.startsWith('http')) {
       try {
+        // Gunakan URLSearchParams + no-cors agar kompatibel dengan Google Apps Script
+        // (mode: 'no-cors' dengan Content-Type: application/json akan diblokir browser)
+        const formData = new URLSearchParams();
+        formData.append('payload', JSON.stringify(payload));
         await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(payload)
+          body: formData
         });
         sentToGoogle = true;
       } catch (err) {
