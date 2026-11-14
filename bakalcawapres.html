@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seleksi Bakal Calon Wakil Presiden RI</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;font-family:Arial,sans-serif;
+ background:#f2f4f7;color:#263238;
+}
+header{
+ background:linear-gradient(120deg,#a50000,#d71920);
+ color:white;text-align:center;padding:35px 15px;
+}
+.logo{font-size:42px}
+header h1{font-size:23px;margin:12px 0 8px}
+header p{margin:0;font-size:14px}
+.container{
+ max-width:850px;margin:30px auto;padding:0 15px;
+}
+.notice{
+ background:#fff3cd;border-left:5px solid #e5a000;
+ padding:14px;margin-bottom:20px;border-radius:5px;
+ font-size:13px;line-height:1.6;
+}
+.card{
+ background:white;padding:25px;border-radius:12px;
+ box-shadow:0 3px 15px #0000000d;margin-bottom:20px;
+}
+.card h2{
+ font-size:18px;color:#a50000;
+ border-bottom:2px solid #eee;padding-bottom:12px;
+}
+.grid{
+ display:grid;grid-template-columns:1fr 1fr;gap:16px;
+}
+.field{margin-bottom:15px}
+.field.full{grid-column:1/-1}
+label{display:block;font-size:13px;font-weight:bold;margin-bottom:7px}
+input,select,textarea{
+ width:100%;padding:12px;border:1px solid #ccd1d8;
+ border-radius:6px;font-size:14px;
+}
+textarea{min-height:100px;resize:vertical}
+input:focus,select:focus,textarea:focus{
+ outline:2px solid #e7a0a0;border-color:#a50000;
+}
+button{
+ background:#b00000;color:white;border:0;
+ padding:15px 25px;border-radius:7px;
+ font-size:15px;font-weight:bold;cursor:pointer;width:100%;
+}
+button:hover{background:#850000}
+.agreement{font-size:13px;line-height:1.6;margin:20px 0}
+footer{text-align:center;color:#777;font-size:12px;padding:25px}
+.modal{
+ display:none;position:fixed;inset:0;background:#0009;
+ justify-content:center;align-items:center;padding:15px;
+}
+.modal-content{
+ background:white;border-radius:14px;padding:30px;
+ max-width:420px;width:100%;text-align:center;
+ animation:show .25s ease;
+}
+@keyframes show{from{transform:scale(.9);opacity:0}
+to{transform:scale(1);opacity:1}}
+.success{font-size:55px;color:#168b50}
+.modal h2{color:#168b50}
+.modal p{font-size:14px;line-height:1.7}
+.modal button{margin-top:15px}
+@media(max-width:600px){
+ .grid{grid-template-columns:1fr}
+ header h1{font-size:19px}
+ .card{padding:18px}
+}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="logo">🇮🇩</div>
+ <h1>SELEKSI BAKAL CALON WAKIL PRESIDEN</h1>
+ <p>REPUBLIK INDONESIA</p>
+ <p style="margin-top:12px">FORMULIR PENDAFTARAN PESERTA SELEKSI</p>
+</header>
+
+<main class="container">
+
+<div class="notice">
+ <strong>INFORMASI DEMO / NONRESMI</strong><br>
+ Portal ini merupakan simulasi pendaftaran dan bukan portal resmi
+ Pemerintah Republik Indonesia. Pengisian formulir tidak merupakan
+ pencalonan resmi berdasarkan peraturan perundang-undangan.
+</div>
+
+<form id="formPendaftaran">
+
+<div class="card">
+<h2>1. Identitas Calon</h2>
+<div class="grid">
+<div class="field full">
+<label>Nama Lengkap *</label>
+<input type="text" required placeholder="Nama lengkap sesuai identitas">
+</div>
+<div class="field">
+<label>Tempat Lahir *</label>
+<input type="text" required>
+</div>
+<div class="field">
+<label>Tanggal Lahir *</label>
+<input type="date" required>
+</div>
+<div class="field">
+<label>Jenis Kelamin *</label>
+<select required>
+<option value="">Pilih</option>
+<option>Laki-laki</option>
+<option>Perempuan</option>
+</select>
+</div>
+<div class="field">
+<label>Kewarganegaraan *</label>
+<select required>
+<option value="">Pilih</option>
+<option>Indonesia</option>
+</select>
+</div>
+<div class="field full">
+<label>Alamat Domisili *</label>
+<textarea required placeholder="Alamat domisili"></textarea>
+</div>
+<div class="field">
+<label>Email *</label>
+<input type="email" required placeholder="nama@email.com">
+</div>
+<div class="field">
+<label>Nomor Telepon *</label>
+<input type="tel" required placeholder="08xxxxxxxxxx">
+</div>
+</div>
+</div>
+
+<div class="card">
+<h2>2. Riwayat Pendidikan</h2>
+<div class="grid">
+<div class="field">
+<label>Pendidikan Terakhir *</label>
+<select required>
+<option value="">Pilih pendidikan</option>
+<option>SMA / Sederajat</option>
+<option>Diploma</option>
+<option>S1</option>
+<option>S2</option>
+<option>S3</option>
+</select>
+</div>
+<div class="field">
+<label>Nama Perguruan Tinggi</label>
+<input type="text">
+</div>
+<div class="field full">
+<label>Bidang Keahlian</label>
+<input type="text" placeholder="Contoh: Hukum, Ekonomi, Politik">
+</div>
+</div>
+</div>
+
+<div class="card">
+<h2>3. Pengalaman dan Riwayat Jabatan</h2>
+<div class="field">
+<label>Pekerjaan Saat Ini *</label>
+<input type="text" required>
+</div>
+<div class="field">
+<label>Riwayat Jabatan / Pengalaman Organisasi *</label>
+<textarea required placeholder="Jelaskan pengalaman kepemimpinan, jabatan, dan organisasi"></textarea>
+</div>
+</div>
+
+<div class="card">
+<h2>4. Visi dan Misi</h2>
+<div class="field">
+<label>Visi sebagai Bakal Calon Wakil Presiden *</label>
+<textarea required placeholder="Tuliskan visi Anda..."></textarea>
+</div>
+<div class="field">
+<label>Misi dan Program Prioritas *</label>
+<textarea required placeholder="Tuliskan misi dan program prioritas Anda..."></textarea>
+</div>
+</div>
+
+<div class="card">
+<h2>5. Dokumen Pendukung</h2>
+<div class="field">
+<label>Foto Profil</label>
+<input type="file" accept="image/*">
+</div>
+<div class="field">
+<label>Dokumen Riwayat Hidup (CV)</label>
+<input type="file" accept=".pdf,.doc,.docx">
+</div>
+<div class="field">
+<label>Dokumen Pendukung Lainnya</label>
+<input type="file" accept=".pdf,.jpg,.jpeg,.png">
+</div>
+<p style="font-size:12px;color:#777">
+Dalam versi demo, berkas hanya dipilih di browser dan tidak diunggah.
+</p>
+</div>
+
+<div class="card">
+<h2>6. Pernyataan Pendaftaran</h2>
+<div class="agreement">
+<input type="checkbox" id="persetujuan" required
+style="width:auto;vertical-align:middle">
+<label for="persetujuan" style="display:inline">
+Saya menyatakan bahwa data yang saya isikan merupakan data simulasi
+yang digunakan untuk keperluan demonstrasi portal seleksi.
+</label>
+</div>
+<button type="submit">KIRIM PENDAFTARAN</button>
+</div>
+
+</form>
+</main>
+
+<footer>
+© 2026 Portal Simulasi Seleksi Bakal Calon Wakil Presiden RI<br>
+DEMO / NONRESMI – Bukan Portal Pemerintah
+</footer>
+
+<div class="modal" id="modalSukses">
+<div class="modal-content">
+<div class="success">✓</div>
+<h2>Pendaftaran Berhasil!</h2>
+<p>
+Terima kasih telah mengisi formulir pendaftaran
+Bakal Calon Wakil Presiden Republik Indonesia.
+</p>
+<p>
+Pendaftaran Anda telah berhasil diselesaikan dalam simulasi ini.
+Informasi hasil seleksi akan diberitahukan setelah proses seleksi selesai.
+</p>
+<button onclick="tutupModal()">Tutup</button>
+</div>
+</div>
+
+<script>
+document.getElementById("formPendaftaran")
+.addEventListener("submit",function(e){
+ e.preventDefault();
+
+ if(!this.reportValidity()) return;
+
+ document.getElementById("modalSukses")
+ .style.display="flex";
+
+ this.reset();
+});
+
+function tutupModal(){
+ document.getElementById("modalSukses")
+ .style.display="none";
+}
+</script>
+
+</body>
+</html>
