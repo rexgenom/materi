@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kebijakan Privasi - TimeCamera (GPS Map Camera)</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-color: #38bdf8;
+            --border-color: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            color: var(--accent-color);
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .meta {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        h2 {
+            color: var(--text-primary);
+            font-size: 20px;
+            margin-top: 28px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 10px;
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-bottom: 14px;
+        }
+
+        ul {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-left: 24px;
+            margin-bottom: 14px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .highlight-box {
+            background: rgba(56, 189, 248, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .highlight-box p {
+            color: var(--text-primary);
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Kebijakan Privasi</h1>
+            <p class="meta">Aplikasi: <strong>TimeCamera - GPS Map Camera</strong> | Tanggal Efektif: 1 Maret 2026</p>
+        </header>
+
+        <section>
+            <p>Selamat datang di <strong>TimeCamera (GPS Map Camera)</strong>. Privasi Anda sangat penting bagi kami. Kebijakan Privasi ini menjelaskan jenis informasi yang kami kumpulkan, bagaimana informasi tersebut digunakan, dan komitmen kami dalam melindungi data pribadi Anda saat menggunakan aplikasi kami.</p>
+
+            <div class="highlight-box">
+                <p>🔒 <strong>Jaminan Pemrosesan Lokal:</strong> Semua data lokasi, foto, dan video yang Anda ambil melalui TimeCamera diproses secara 100% LOKAL di perangkat Anda. Data Anda tidak pernah diunggah, dijual, atau dibagikan ke server eksternal kami.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>1. Informasi yang Kami Kumpulkan</h2>
+            <p>Untuk menyediakan fitur stempel lokasi (watermark), tanggal/waktu, dan peta pada dokumentasi Anda, aplikasi membutuhkan akses ke beberapa data berikut:</p>
+            <ul>
+                <li><strong>Data Lokasi Presisi & Perkiraan (GPS):</strong> Kami mengakses koordinat Latitude, Longitude, Ketinggian (Altitude), Akurasi, dan Alamat Geocoding saat aplikasi sedang dibuka atau digunakan. Data ini digunakan khusus untuk mencetak lokasi pada foto dan video Anda.</li>
+                <li><strong>Kamera (Camera):</strong> Digunakan untuk pengambilan foto dokumentasi dan perekaman video lapangan.</li>
+                <li><strong>Mikrofon (Record Audio):</strong> Digunakan untuk merekam suara saat fitur perekaman video digunakan.</li>
+                <li><strong>Penyimpanan Perangkat (Storage):</strong> Digunakan untuk menyimpan foto dan video hasil dokumentasi ke dalam galeri perangkat Anda.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>2. Penggunaan Informasi</h2>
+            <p>Informasi yang diakses oleh aplikasi digunakan semata-mata untuk:</p>
+            <ul>
+                <li>Menampilkan peta overlay, alamat, koordinat GPS, dan timestamp otomatis pada foto dan video hasil tangkapan Anda.</li>
+                <li>Menyimpan berkas dokumentasi secara langsung ke galeri media lokal perangkat Anda.</li>
+                <li>Menyediakan fitur pencatatan laporan lapangan secara lokal.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>3. Pengungkapan & Pembagian Data Pihak Ketiga</h2>
+            <p>Kami <strong>TIDAK pernah menjual, menyewakan, membagikan, atau mengunggah</strong> data lokasi, foto, video, atau informasi pribadi Anda ke pihak ketiga mana pun.</p>
+            <p>Aplikasi ini mengintegrasikan layanan peta resmi untuk menampilkan thumbnail peta pada stempel:</p>
+            <ul>
+                <li><strong>Google Maps SDK (Google Play Services):</strong> Digunakan untuk menampilkan peta Google pada watermark. Penggunaan Google Maps tunduk pada <a href="https://policies.google.com/privacy" target="_blank" style="color: var(--accent-color);">Kebijakan Privasi Google</a>.</li>
+                <li><strong>OpenStreetMap (OSMDroid):</strong> Digunakan sebagai pilihan peta alternatif. Penggunaan peta tunduk pada syarat layanan OpenStreetMap.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>4. Pengendalian Izin oleh Pengguna</h2>
+            <p>Anda memiliki kontrol penuh atas izin yang diberikan kepada aplikasi. Anda dapat mencabut izin lokasi, kamera, atau mikrofon kapan saja melalui menu Pengaturan perangkat Android Anda:</p>
+            <p><em>Pengaturan HP &gt; Aplikasi &gt; TimeCamera &gt; Izin (Permissions)</em></p>
+        </section>
+
+        <section>
+            <h2>5. Privasi Anak-Anak</h2>
+            <p>Aplikasi kami tidak ditujukan untuk anak-anak di bawah usia 13 tahun. Kami tidak secara sengaja mengumpulkan informasi pribadi dari anak-anak di bawah 13 tahun.</p>
+        </section>
+
+        <section>
+            <h2>6. Perubahan Kebijakan Privasi</h2>
+            <p>Kami dapat memperbarui Kebijakan Privasi ini dari waktu ke waktu. Setiap perubahan akan dipublikasikan di halaman ini dengan tanggal efektif yang diperbarui.</p>
+        </section>
+
+        <section>
+            <h2>7. Hubungi Kami</h2>
+            <p>Jika Anda memiliki pertanyaan atau saran mengenai Kebijakan Privasi ini, silakan hubungi kami melalui email pengembang yang tertera di Google Play Store.</p>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 TimeCamera App. Hak Cipta Dilindungi Undang-Undang.</p>
+        </footer>
+    </div>
+</body>
+</html>
